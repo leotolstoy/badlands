@@ -38,6 +38,8 @@ if __name__ == '__main__':
 
 	#PYMC3 magic
 	with pm.Model() as basic_model:
+
+		#set up priors
 		alpha = pm.Normal('alpha',mu=0,sd=10)
 		beta = pm.Normal('beta',mu=0,sd=10)
 		sigma = pm.HalfNormal('sigma',sd=10)

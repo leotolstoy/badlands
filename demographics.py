@@ -10,10 +10,7 @@ class DemographicsModel():
 		self.turnoutModel = turnoutModel
 		self.regVoterModel = regVoterModel
 
-		self.populationTimeModel = timeModel(self.populationModel.sample())
-		self.turnoutTimeModel = timeModel(self.turnoutModel.sample())
-		self.regVoterTimeModel = timeModel(self.regVoterModel.sample())
-		self.voteMarginTimeModel = timeModel(self.voteMarginModel.sample())
+		self.sampleModel()
 
 
 	def sampleModel(self,):

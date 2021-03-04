@@ -41,6 +41,9 @@ class State():
 		self.yearToFlip = []
 
 
+		def resampleDemographicsModel(key):
+			self.demographics[key].sampleModel()
+
 
 
 

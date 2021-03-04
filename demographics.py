@@ -1,10 +1,24 @@
-
-from population import PopulationModel
-
+from timeModel import timeModel
+from bayesianModel import BayesianModel
 
 
 
 class DemographicsModel():
 
-	def __init__(self,):
-		self.population = PopulationModel(100)
+	def __init__(self,populationModel, turnoutModel, regVoterModel, voteMarginModel):
+		self.populationModel = populationModel
+		self.turnoutModel = turnoutModel
+		self.regVoterModel = regVoterModel
+
+		self.populationTimeModel = timeModel(self.populationModel.sample())
+		self.turnoutTimeModel = timeModel(self.turnoutModel.sample())
+		self.regVoterTimeModel = timeModel(self.regVoterModel.sample())
+		self.voteMarginTimeModel = timeModel(self.voteMarginModel.sample())
+
+
+	def sampleModel(self,):
+
+		self.populationTimeModel = timeModel(self.populationModel.sample())
+		self.turnoutTimeModel = timeModel(self.turnoutModel.sample())
+		self.regVoterTimeModel = timeModel(self.regVoterModel.sample())
+		self.voteMarginTimeModel = timeModel(self.voteMarginModel.sample())

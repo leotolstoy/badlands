@@ -12,15 +12,18 @@ from bayesianModel import BayesianModel
 class State():
 	def __init__(self,p1,p2,p3,p4):
 
-		self.populationModel = BayesianModel(p1)
-		self.turnoutModel = BayesianModel(p2)
-		self.regVoterModel = BayesianModel(p3)
-		self.voteMarginModel = BayesianModel(p4)
+		# TODO: make turnout model it's own bi-mean thing
+		# TODO: make reg voter model, vote margin model, and population model polynomial/logistic/1st order, have them inherit from BayesianModel
+
+		self.overallPopulationModel = BayesianModel(p1)
+		self.overallTurnoutModel = BayesianModel(p2)
+		self.overallRegVoterModel = BayesianModel(p3)
+		self.overallVoteMarginModel = BayesianModel(p4)
 
 		# self.major_cities = [CityModel()]
 		self.demographics = dict([\
-			('college_ed',DemographicsModel()),\
-			('overall',DemographicsModel()),\
+			('college_ed',DemographicsModel(self.overallPopulationModel, self.overallTurnoutModel, self.overallRegVoterModel, self.overallVoteMarginModel)),\
+			('overall',DemographicsModel(self.overallPopulationModel, self.overallTurnoutModel, self.overallRegVoterModel, self.overallVoteMarginModel)),\
 			])  
 
 		self.totalPopulation = self.demographics['overall'].populationTimeModel.evalModelAtTime(0)

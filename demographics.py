@@ -9,6 +9,7 @@ class DemographicsModel():
 		self.populationModel = populationModel
 		self.turnoutModel = turnoutModel
 		self.regVoterModel = regVoterModel
+		self.voteMarginModel = voteMarginModel
 
 		self.sampleModel()
 

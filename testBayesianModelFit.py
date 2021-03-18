@@ -18,7 +18,7 @@ print(f'{pm.__name__}: v. {pm.__version__}')
 if __name__ == '__main__':
 	np.random.seed(7000) 
 
-	a_true = 2
+	a_true = 20
 	b_true = 3
 
 	x = np.linspace(0,10)

@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
 	fig = plt.figure()
 	ax = plt.axes()
-	ax.plot(x,y,'o')
+	ax.plot(x,y,'ro')
 	# plt.show()
 	
 
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 		print(summary)
 
 		#sample posterior predictive
-		ppc = pm.sample_posterior_predictive(trace, var_names=["alpha","beta","sigma"], model=basic_model)
+		ppc = pm.sample_posterior_predictive(trace, var_names=["alpha","beta","sigma","y_like"], model=basic_model)
 
 
 
@@ -78,7 +78,15 @@ if __name__ == '__main__':
 										 textsize=20,
 										 round_to=4);
 
+		# confidence intervals
 
+		crit_l = np.percentile(ppc['y_like'],q=2.5,axis=0)
+		crit_u = np.percentile(ppc['y_like'],q=97.5,axis=0)
+		mean_spp = np.mean(ppc['y_like'],axis=0)
+		print(len(crit_l))
+
+		ax.fill_between(x,crit_l, crit_u,'b',alpha=0.2)
+		ax.plot(x,mean_spp,'b',label='Mean')
 
 		#try sampling just one sample
 		ppc1 = pm.sample_posterior_predictive(trace, samples = 1, var_names=["alpha","beta","sigma"], model=basic_model)

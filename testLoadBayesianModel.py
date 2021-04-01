@@ -38,22 +38,24 @@ if __name__ == '__main__':
 	directory_name = 'testDir'
 
 
+	#Load model
+	
+	
+
+	with open(directory_name+'/model.pkl','rb') as buff:
+		basic_model = pickle.load(buff)
+
+	
+
+
+
 	#PYMC3 magic
-	with pm.Model() as basic_model:
+	with basic_model:
 
-		#set up priors
-		alpha = pm.Normal('alpha',mu=0,sd=10)
-		beta = pm.Normal('beta',mu=0,sd=10)
-		sigma = pm.HalfNormal('sigma',sd=10)
+		# with open(directory_name+'/trace.pkl','rb') as buff:
+		# 	trace = pickle.load(buff)
 
-
-		#Likelihood function
-		mu = alpha + beta*x
-		y_likelihood = pm.Normal('y_like',mu=mu,sigma=sigma,observed=y)
-
-
-
-		trace = pm.sample(2000, tune=500,cores=4,model=basic_model)
+		trace = pm.load_trace(directory=directory_name)
 
 		summary = az.summary(trace, var_names=["alpha","beta","sigma"])
 		print(summary)
@@ -100,15 +102,6 @@ if __name__ == '__main__':
 		y_s = a_s + b_s * x
 		ax.plot(x,y_s,'b')
 
-
-		# Save model
-		fname = pm.save_trace(trace=trace,directory=directory_name, overwrite='True')
-
-		with open(directory_name+'/trace.pkl','wb') as buff:
-			pickle.dump(trace,buff)
-
-		with open(directory_name+'/model.pkl','wb') as buff:
-			pickle.dump(basic_model,buff)
 
 		plt.show()
 

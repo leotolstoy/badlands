@@ -2,9 +2,7 @@
 
 class timeModel():
 
-	def __init__(self,params):
-		self.params = params
-
+	def __init__(self,):
 
 	def evalModelAtTime(time):
 		# encode the population change using a numerical curve

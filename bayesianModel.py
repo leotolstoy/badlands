@@ -11,13 +11,12 @@ class BayesianModel():
 
 		with open(pathToModel,'rb') as buff:
 			self.model = pickle.load(buff)
-
-		self.model = 'model'
 		self.trace = pm.load_trace(directory=pathToTrace, model=self.model)
 
 
 	def sampleModelPPC(self,samples,var_names):
 		self.ppc = pm.sample_posterior_predictive(self.trace, samples=samples, var_names=var_names, model=self.model)
+		return self.ppc
 
 	def plotPosterior(self,):
 		self.data_spp = az.from_pymc3(trace=self.trace, posterior_predictive=self.ppc)

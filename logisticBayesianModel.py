@@ -14,7 +14,7 @@ class LogisticBayesianModel(BayesianModel):
 	def __init__(self,pathToModel, pathToTrace):
 
 		super().__init__(pathToModel, pathToTrace)
-		self.var_names = ['y','A','k','x0']
+		self.var_names = ['y','A','k','x0','C']
 
 		#try sampling just one sample
 		self.sampleModel()

@@ -15,34 +15,60 @@ class State():
 		# TODO: make turnout model it's own bi-mean thing
 		# TODO: make reg voter model, vote margin model, and population model polynomial/logistic/1st order, have them inherit from BayesianModel
 
-		self.overallPopulationModel = LogisticBayesianModel(p1)
-		self.overallTurnoutModel = LogisticBayesianModel(p2)
-		self.overallRegVoterModel = LogisticBayesianModel(p3)
-		self.overallVoteMarginModel = LogisticBayesianModel(p4)
+		self.projectedPopulationModel = LogisticBayesianModel(p1)
+		self.projectedTurnoutModel = LogisticBayesianModel(p2)
+		self.projectedRegVoterFracModel = LogisticBayesianModel(p3)
+		self.projectedVoteMarginModel = LogisticBayesianModel(p4)
 
 		# self.major_cities = [CityModel()]
+
+		# We could potentially split up the 'projected' category into 'college_ed' and 'non_college_ed' categories, each with a 
+		# separate model. 
 		self.demographics = dict([\
-			('college_ed',DemographicsModel(self.overallPopulationModel, self.overallTurnoutModel, self.overallRegVoterModel, self.overallVoteMarginModel)),\
-			('overall',DemographicsModel(self.overallPopulationModel, self.overallTurnoutModel, self.overallRegVoterModel, self.overallVoteMarginModel)),\
+			('projected',DemographicsModel(self.projectedPopulationModel, self.projectedTurnoutModel, self.projectedRegVoterFracModel, self.projectedVoteMarginModel)),\
 			])  
 
-		self.totalPopulation = self.demographics['overall'].populationModel.evalModelAtTime(0)
-		self.overallTurnout = self.demographics['overall'].turnoutModel.evalModelAtTime(0)
-		self.overallRegVoter = self.demographics['overall'].regVoterModel.evalModelAtTime(0)
-		self.overallVoteMargin = self.demographics['overall'].voteMarginModel.evalModelAtTime(0)
+		self.resetTimeDemographics('projected')
 
-		self.totalVotes = self.overallTurnout * self.overallRegVoter
-		self.frac_overall_dem = 0.5 + self.overallVoteMargin/2
-		self.frac_overall_rep = 0.5 - self.overallVoteMargin/2
+	
 
-		self.overall_dem_votes = self.frac_overall_dem * self.totalVotes
-		self.overall_rep_votes = self.frac_overall_rep * self.totalVotes
+	def resampleDemographicsModels(self,key):
+		self.demographics[key].sampleModel()
+
+	def evaluateDemoModelAtTime(self, time, key):
+
+		self.totalPopulation = self.demographics[key].populationModel.evalModelAtTime(time)
+		self.projectedTurnout = self.demographics[key].turnoutModel.evalModelAtTime(time)
+		self.projectedRegVoterFrac = self.demographics[key].regVoterFracModel.evalModelAtTime(time)
+		self.projectedVoteMargin = self.demographics[key].voteMarginModel.evalModelAtTime(time)
+
+		self.totalVotes = self.projectedTurnout * self.projectedRegVoterFrac * self.totalPopulation
+		self.frac_projected_dem = 0.5 + self.projectedVoteMargin/2
+		self.frac_projected_rep = 0.5 - self.projectedVoteMargin/2
+
+		self.projected_dem_votes = self.frac_projected_dem * self.totalVotes
+		self.projected_rep_votes = self.frac_projected_rep * self.totalVotes
+
+		self.projected_raw_margin = self.projected_dem_votes - self.projected_rep_votes
+
+
+	def resetTimeDemographics(self,key):
+
+		self.evaluateDemoModelAtTime(0, 'projected')
+		
 
 		self.yearToFlip = []
 
 
-		def resampleDemographicsModel(key):
-			self.demographics[key].sampleModel()
+
+
+
+
+
+
+
+
+
 
 
 

@@ -34,8 +34,9 @@ class LogisticBayesianModel(BayesianModel):
 		A = self.params['A']
 		k = self.params['k']
 		x0 = self.params['x0']
+		x0 = self.params['C']
 
-		return A/(1 + np.exp(-k * (time - x0)))
+		return A/(1 + np.exp(-k * (time - x0))) + C
 
 	def evalModelRateAtTime(self, time):
 		return -1

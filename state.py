@@ -26,10 +26,10 @@ class State():
 			('overall',DemographicsModel(self.overallPopulationModel, self.overallTurnoutModel, self.overallRegVoterModel, self.overallVoteMarginModel)),\
 			])  
 
-		self.totalPopulation = self.demographics['overall'].evalModelAtTime(0)
-		self.overallVoteMargin = self.demographics['overall'].evalModelAtTime(0)
-		self.overallRegVoter = self.demographics['overall'].evalModelAtTime(0)
-		self.overallTurnout = self.demographics['overall'].evalModelAtTime(0)
+		self.totalPopulation = self.demographics['overall'].populationModel.evalModelAtTime(0)
+		self.overallTurnout = self.demographics['overall'].turnoutModel.evalModelAtTime(0)
+		self.overallRegVoter = self.demographics['overall'].regVoterModel.evalModelAtTime(0)
+		self.overallVoteMargin = self.demographics['overall'].voteMarginModel.evalModelAtTime(0)
 
 		self.totalVotes = self.overallTurnout * self.overallRegVoter
 		self.frac_overall_dem = 0.5 + self.overallVoteMargin/2

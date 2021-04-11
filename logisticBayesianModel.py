@@ -9,7 +9,7 @@ class LogisticBayesianModel(BayesianModel):
 
 
 
-	# y = A/(1 + exp(-k*(x - x0))
+	# y = C + A/(1 + exp(-k*(x - x0))
 
 	def __init__(self,pathToModel, pathToTrace):
 

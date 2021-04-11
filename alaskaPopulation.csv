@@ -1,6 +1,5 @@
-﻿,,,,,,,,,,,,
-Alaska,,,,,Demographics,,,,,,,
-,Population,Population Change,Vote Margin,Education Rate,White,Black,Hispanic/Latino,American Indian,AAPI,Other,Turnout,Eligible Voters
+﻿Alaska,,,,,Demographics,,,,,,,
+Year,Population,Population Change,Vote Margin (D - R),Education Rate,White,Black,Hispanic/Latino,American Indian,AAPI,Other,Turnout,Eligible Voters
 2000,"632,716","4,370",,,"463,075","27,425","27,892","108,430","33,786",,,
 2002,"649,466","7,737",-155305,,"472,059","28,357","31,483","111,314","37,736",,,
 2004,"667,146","7,493",-9349,,"482,786","29,482","34,703","113,773","41,105",,,

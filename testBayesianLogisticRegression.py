@@ -36,7 +36,7 @@ if __name__ == '__main__':
 	y = logisticModel(A, k, x0, C, x)
 
 	# add noise
-	noise = 1*np.random.randn(len(y))
+	noise = 2*np.random.randn(len(y))
 	# print(noise)
 	y = y + noise
 
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
 
 
-		trace = pm.sample(4000, tune=2000,cores=4,model=logistic_model,init='adapt_diag')
+		trace = pm.sample(4000, tune=2000,cores=4,model=logistic_model)
 
 		summary = az.summary(trace, var_names=['A','k','x0'])
 		print(summary)

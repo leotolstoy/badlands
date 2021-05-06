@@ -5,12 +5,12 @@ from logisticBayesianModel import LogisticBayesianModel
 
 class DemographicsModel():
 
-	def __init__(self,populationModel, turnoutModel, regVoterModel, voteMarginModel):
+	def __init__(self,populationModel, turnoutModel, regVoterFracModel, voteMarginModel):
 
 		# All Bayesian Models
 		self.populationModel = populationModel
 		self.turnoutModel = turnoutModel
-		self.regVoterModel = regVoterModel
+		self.regVoterFracModel = regVoterFracModel
 		self.voteMarginModel = voteMarginModel
 
 		self.sampleModel()
@@ -19,6 +19,6 @@ class DemographicsModel():
 	def sampleModel(self,):
 
 		self.populationModel.sampleModel()
-		self.turnoutTimeModel.sampleModel()
-		self.regVoterTimeModel.sampleModel()
-		self.voteMarginTimeModel.sampleModel()
+		self.turnoutModel.sampleModel()
+		self.regVoterFracModel.sampleModel()
+		self.voteMarginModel.sampleModel()

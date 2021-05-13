@@ -14,18 +14,23 @@ if __name__ == '__main__':
 
     # National
     # Educated
-    p1 = 'path1'
     p2 = 'path2'
     p3 = 'path3'
 
 	national_edu_turnout_model = LogisticBayesianModel(p2)
 	national_edu_voteMargin_model = LogisticBayesianModel(p3)
 
+    # non-Educated
+    p2 = 'path2'
+    p3 = 'path3'
+
+	national_noedu_turnout_model = LogisticBayesianModel(p2)
+	national_noedu_voteMargin_model = LogisticBayesianModel(p3)
+
+
     #Alaska model paths
     # Educated
     p1 = 'path1'
-    p2 = 'path2'
-    p3 = 'path3'
 
     alaska_edu_population_model = LogisticBayesianModel(p1)
 	alaska_edu_turnout_model = national_edu_turnout_model
@@ -34,8 +39,6 @@ if __name__ == '__main__':
 
 	# non-Educated
     p1 = 'path1'
-    p2 = 'path2'
-    p3 = 'path3'
 
     alaska_noedu_population_model = LogisticBayesianModel(p1)
 	alaska_noedu_turnout_model = national_noedu_turnout_model
@@ -66,7 +69,7 @@ if __name__ == '__main__':
 
         years = []
         population_edu = []
-        population_nedu = []
+        population_noedu = []
         population_edu_proj = []
 
         population_projected = []
@@ -75,7 +78,7 @@ if __name__ == '__main__':
 
         raw_margin_edu_proj = []
         raw_margin_edu = []
-        raw_margin_nedu = []
+        raw_margin_noedu = []
         raw_margin_proj = []
         raw_margin = []
 
@@ -89,14 +92,14 @@ if __name__ == '__main__':
             years.append(year)
             population_edu_proj.append(alaska.population_edu_proj)
 	        population_edu.append(alaska.population_edu)
-	        population_nedu.append(alaska.population_nedu)
+	        population_noedu.append(alaska.population_noedu)
 	        population_proj.append(alaska.population_projected)
 	        population.append(alaska.population)
 
 
 	        raw_margin_edu_proj.append(alaska.raw_margin_edu_proj)
 	        raw_margin_edu.append(alaska.raw_margin_edu)
-	        raw_margin_nedu.append(alaska.raw_margin_nedu)
+	        raw_margin_noedu.append(alaska.raw_margin_noedu)
 	        raw_margin_proj.append(alaska.raw_margin_proj)
 	        raw_margin.append(alaska.raw_margin)
 
@@ -107,7 +110,7 @@ if __name__ == '__main__':
                 
         
         ax1[0].plot(years,population_edu,'-o',label='population_edu')
-        ax1[1].plot(years,population_nedu,'-o',label='population_nedu')
+        ax1[1].plot(years,population_noedu,'-o',label='population_noedu')
         ax1[2].plot(years,population_edu_proj,'-o',label='population_edu_proj')
         ax1[3].plot(years,population_proj,'-o',label='population_proj')
         ax1[4].plot(years,population,'-o',label='population')
@@ -116,7 +119,7 @@ if __name__ == '__main__':
 
 
         ax2[0].plot(years,raw_margin_edu,'-o',label='raw_margin_edu')
-        ax2[1].plot(years,raw_margin_nedu,'-o',label='raw_margin_nedu')
+        ax2[1].plot(years,raw_margin_noedu,'-o',label='raw_margin_noedu')
         ax2[2].plot(years,raw_margin_edu_proj,'-o',label='raw_margin_edu_proj')
         ax2[3].plot(years,raw_margin_proj,'-o',label='raw_margin_proj')
         ax2[4].plot(years,raw_margin,'-o',label='raw_margin')

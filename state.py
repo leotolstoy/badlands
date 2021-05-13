@@ -40,29 +40,29 @@ class State():
 
 		# Tally up populations
 		self.population_edu_proj = demographics['college_ed'].totalPopulation
-		self.population_nedu_proj = demographics['non_college_ed'].totalPopulation
+		self.population_noedu_proj = demographics['non_college_ed'].totalPopulation
 
 		self.population_edu = self.population_edu_proj + self.importer_population_edu
-		self.population_nedu = self.population_nedu_proj
+		self.population_noedu = self.population_noedu_proj
 
 		# Could also be something along the lines of :
 		# self.population_edu = f(self.population_edu)
 
 		
-		self.population_proj = self.population_edu_proj + self.population_nedu_proj
-		self.population = self.population_edu + self.population_nedu
+		self.population_proj = self.population_edu_proj + self.population_noedu_proj
+		self.population = self.population_edu + self.population_noedu
 
 
 		# Tally up raw margins
 
 		self.raw_margin_edu_proj = demographics['college_ed'].raw_margin
-		self.raw_margin_nedu_proj = demographics['non_college_ed'].raw_margin
+		self.raw_margin_noedu_proj = demographics['non_college_ed'].raw_margin
 
 		self.raw_margin_edu = self.raw_margin_edu_proj + self.importer_raw_margin
-		self.raw_margin_nedu = self.raw_margin_nedu_proj
+		self.raw_margin_noedu = self.raw_margin_noedu_proj
 
-		self.raw_margin_proj = self.raw_margin_edu_proj + self.raw_margin_nedu_proj
-		self.raw_margin = self.raw_margin_edu + self.raw_margin_nedu
+		self.raw_margin_proj = self.raw_margin_edu_proj + self.raw_margin_noedu_proj
+		self.raw_margin = self.raw_margin_edu + self.raw_margin_noedu
 
 
 	def resetState(self,)

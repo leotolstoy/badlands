@@ -32,7 +32,7 @@ class State():
 
 	
 
-	def resampleDemographicsModels(self,key):
+	def resampleDemographicsModels(self, key):
 		self.demographics[key].sampleModel()
 
 	def evaluateDemoModelAtTime(self, time, key):
@@ -53,10 +53,10 @@ class State():
 
 	def resetTimeDemographics(self,key):
 
+		self.resampleDemographicsModels('projected')
 		self.evaluateDemoModelAtTime(0, 'projected')
 		
 
-		self.yearToFlip = []
 
 
 

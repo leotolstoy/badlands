@@ -25,6 +25,7 @@ class LogisticBayesianModel(BayesianModel):
 		super.sampleModelPPC(samples,self.var_names)
 
 	# Sample one instance of the model
+	# May need to check that every sample is random
 	def sampleModel(self,):
 		ppc = sampleModelPPC(1)
 		self.params = ppc

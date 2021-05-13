@@ -24,7 +24,7 @@ class Importer():
 		self.resetTimeDemographics('college_ed')
 
 		
-	def resampleDemographicsModel(key):
+	def resampleDemographicsModel(self,key):
 		self.demographics[key].sampleModel()
 
 	def evaluateDemoModelAtTime(self, time, key):
@@ -44,6 +44,7 @@ class Importer():
 
 	def resetTimeDemographics(self,key):
 
+		self.resampleDemographicsModels('college_ed')
 		self.evaluateDemoModelAtTime(0, 'college_ed')
 
 		

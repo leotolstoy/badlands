@@ -11,15 +11,14 @@ from constantRateModel import ConstantRateModel
 
 
 class Importer():
-	def __init__(self,p1,p2,p3,p4):
+	def __init__(self,p1,p2,p3):
 
 		self.populationModel = ConstantRateModel(p1)
 		self.turnoutModel = ConstantModel(p2)
-		self.regVoterFracModel = ConstantModel(p3)
-		self.voteMarginModel = ConstantModel(p4)
+		self.voteMarginModel = ConstantModel(p3)
 
 		self.demographics = dict([\
-			('college_ed',DemographicsModel(self.populationModel, self.turnoutModel, self.regVoterFracModel, self.voteMarginModel)),\
+			('college_ed',DemographicsModel(self.populationModel, self.turnoutModel, self.voteMarginModel)),\
 			])  
 
 		self.resetTimeDemographics('college_ed')
@@ -32,10 +31,9 @@ class Importer():
 
 		self.totalPopulation = self.demographics[key].populationModel.evalModelAtTime(time)
 		self.turnout = self.demographics[key].turnoutModel.evalModelAtTime(time)
-		self.regVoterFrac = self.demographics[key].regVoterFracModel.evalModelAtTime(time)
 		self.voteMargin = self.demographics[key].voteMarginModel.evalModelAtTime(time)
 
-		self.totalVotes = self.turnout * self.regVoterFrac * self.totalPopulation
+		self.totalVotes = self.turnout * self.totalPopulation
 		self.frac_dem = 0.5 + self.voteMargin/2
 		self.frac_rep = 0.5 - self.voteMargin/2
 
